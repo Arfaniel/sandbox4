@@ -1,0 +1,128 @@
+# Users
+# Add users (create & add an email with verification token (plain text) to queue)
+POST http://sandbox4/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "test tasdfasf",
+    "email" : "asdf@asd.com",
+    "country_id" : "2"
+}
+
+###
+# Verify user
+GET http://sandbox4/api/users
+Accept: application/json
+
+###
+# List users (filter by name OR/AND email OR/AND verified OR/AND country)
+GET http://sandbox4/api/users?filter[name]=&filter[email]=&filter[country]=&filter[verified]=
+GET http://sandbox4/api/users
+
+###
+# Edit users
+POST http://sandbox4/api/users/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "test tasdfasf",
+  "email" : "asdf@asd.com",
+  "country_id" : "2"
+}
+
+###
+# Edit users (list)
+PUT http://sandbox4/api/users
+Accept: application/json
+Content-Type: application/json
+
+[
+    {
+        "id" : 1,
+        "name" : "test tasdfasf",
+        "email" : "asdf@asd.com",
+        "country_id" : "2"
+    },
+    {
+        "id" : 2,
+        "name" : "test tasdfasf",
+        "email" : "asdf@asd.com",
+        "country_id" : "2"
+    }
+]
+
+###
+# Delete users
+DELETE http://sandbox4/api/users/1
+Accept: application/json
+Content-Type: application/json
+
+
+###
+###
+###
+# Projects
+# Add projects
+POST http://sandbox4/api/projects
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "Project 1"
+}
+
+###
+# Link project to user
+POST http://sandbox4/api/projects/1
+Accept: application/json
+Content-Type: application/json
+
+[1, 2, 3]
+
+###
+# List projects incl. labels (filter by user.email OR/AND user.continent OR/AND labels)
+GET http://sandbox4/api/projects?filter[user][continent_id]=&filter[user][email]=&filter[labels][0]=
+Accept: application/json
+Content-Type: application/json
+
+###
+# Delete projects
+DELETE http://sandbox4/api/projects/1
+Accept: application/json
+Content-Type: application/json
+
+
+###
+###
+###
+# Labels
+# Add labels
+POST http://sandbox4/api/labels
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "Label 1"
+}
+
+###
+# Link label to projects
+POST http://sandbox4/api/labels/1
+Accept: application/json
+Content-Type: application/json
+
+[1, 2, 3]
+
+###
+# List labels (filter by user.email OR/AND projects)
+GET http://sandbox4/api/projects?filter[user][email]=&filter[projects]=
+Accept: application/json
+Content-Type: application/json
+
+###
+# Delete labels
+DELETE http://sandbox4/api/labels/1
+Accept: application/json
+Content-Type: application/json
