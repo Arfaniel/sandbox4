@@ -1,35 +1,48 @@
 # Users
 # Add users (create & add an email with verification token (plain text) to queue)
-POST http://sandbox4/api/users
+POST http://sandbox4/api/users/create
 Accept: application/json
 Content-Type: application/json
 
 {
-    "name" : "test tasdfasf",
-    "email" : "asdf@asd.com",
-    "country_id" : "2"
+    "name" : "test1122 tasdfasf",
+    "email" : "asdf@asd22.com",
+    "country_id" : 2
 }
 
 ###
 # Verify user
-GET http://sandbox4/api/users
-Accept: application/json
-
-###
-# List users (filter by name OR/AND email OR/AND verified OR/AND country)
-GET http://sandbox4/api/users?filter[name]=&filter[email]=&filter[country]=&filter[verified]=
-GET http://sandbox4/api/users
-
-###
-# Edit users
-POST http://sandbox4/api/users/1
+POST http://sandbox4/api/token/create
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name" : "test tasdfasf",
-  "email" : "asdf@asd.com",
-  "country_id" : "2"
+    "email" : "mschmeler@example.com",
+    "password" : "password",
+    "device_name" : "android"
+}
+
+###
+# List users (filter by name OR/AND email OR/AND verified OR/AND country)
+GET http://sandbox4/api/users?filter[name]=&filter[email]=&filter[country]=&filter[verified]=
+Content-Type: application/json
+
+###
+# List users (filter by name OR/AND email OR/AND verified OR/AND country)
+GET http://sandbox4/api/users?filter[country]=130&filter[email]=fleffler@example.net
+Content-Type: application/json
+
+###
+###
+# Edit users
+POST http://sandbox4/api/users/17
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "test333",
+    "email": "asdf333@asd.com",
+    "country_id": "1"
 }
 
 ###
@@ -68,6 +81,7 @@ Content-Type: application/json
 POST http://sandbox4/api/projects
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 2|2kUiPwYyc7l0S3Gn0Vw9ZuPX0XSOJgpoAfixLmX7
 
 {
     "name" : "Project 1"

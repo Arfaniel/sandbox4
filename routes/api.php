@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::get('/users', [UserController::class, 'index']);
+Route::post('/users/create', [UserController::class, 'create']);
+Route::post('/token/create', [AuthController::class, 'createToken']);
+Route::post('/users/edit', [AuthController::class, 'edit']);
+
