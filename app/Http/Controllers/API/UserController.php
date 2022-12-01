@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\UserResource;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -47,9 +47,26 @@ class UserController
         ]);
         return $user->createToken('default_device')->plainTextToken;
     }
-    public static function edit(Request $request)
+    public static function edit(Request $request): string
     {
-        $user = User::find($request->id);
-
+        $userId = $request->input('id');
+        $user = User::find($userId);
+        if(!empty($user))
+        {
+            $user->update($request->all());
+            return 'Success';
+        }
+        return "No such user";
+    }
+    public static function delete(Request $request): string
+    {
+        $userId = $request->input('id');
+        $user = User::find($userId);
+        if(!empty($user))
+        {
+            $user->delete();
+            return 'Success';
+        }
+        return "No such user";
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('continent_id');
             $table->timestamps();
             $table->foreign('continent_id')->references('id')->on('continents');
+            $table->softDeletes();
         });
     }
 

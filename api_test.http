@@ -35,7 +35,7 @@ Content-Type: application/json
 ###
 ###
 # Edit users
-POST http://sandbox4/api/users/17
+POST http://sandbox4/api/users/edit?id=12
 Accept: application/json
 Content-Type: application/json
 
@@ -45,30 +45,10 @@ Content-Type: application/json
     "country_id": "1"
 }
 
-###
-# Edit users (list)
-PUT http://sandbox4/api/users
-Accept: application/json
-Content-Type: application/json
-
-[
-    {
-        "id" : 1,
-        "name" : "test tasdfasf",
-        "email" : "asdf@asd.com",
-        "country_id" : "2"
-    },
-    {
-        "id" : 2,
-        "name" : "test tasdfasf",
-        "email" : "asdf@asd.com",
-        "country_id" : "2"
-    }
-]
 
 ###
 # Delete users
-DELETE http://sandbox4/api/users/1
+DELETE http://sandbox4/api/users/delete?id=1
 Accept: application/json
 Content-Type: application/json
 
