@@ -17,7 +17,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email" : "mschmeler@example.com",
+    "email" : "feest.einar@example.net",
     "password" : "password",
     "device_name" : "android"
 }
@@ -58,10 +58,10 @@ Content-Type: application/json
 ###
 # Projects
 # Add projects
-POST http://sandbox4/api/projects
+POST http://sandbox4/api/projects/create
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 2|2kUiPwYyc7l0S3Gn0Vw9ZuPX0XSOJgpoAfixLmX7
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
 {
     "name" : "Project 1"
@@ -69,24 +69,34 @@ Authorization: Bearer 2|2kUiPwYyc7l0S3Gn0Vw9ZuPX0XSOJgpoAfixLmX7
 
 ###
 # Link project to user
-POST http://sandbox4/api/projects/1
+POST http://sandbox4/api/projects/linkUser
 Accept: application/json
 Content-Type: application/json
 
-[1, 2, 3]
+{
+    "projectId" : 7,
+    "users" : [9, 10, 4]
+}
+
 
 ###
 # List projects incl. labels (filter by user.email OR/AND user.continent OR/AND labels)
-GET http://sandbox4/api/projects?filter[user][continent_id]=&filter[user][email]=&filter[labels][0]=
+GET http://sandbox4/api/projects?filter[user][continent_id]=&filter[user][email]=&filter[labels]=
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
+
 
 ###
 # Delete projects
-DELETE http://sandbox4/api/projects/1
+DELETE http://sandbox4/api/projects/delete
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
+{
+    "projectId" : 7
+}
 
 ###
 ###
