@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Label extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'name',
+        'user_id'
+    ];
     public function projects()
     {
         return $this->belongsToMany(Project::class);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\LabelController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,11 @@ Route::post('/users/edit', [UserController::class, 'edit']);
 Route::delete('/users/delete', [UserController::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/projects', [ProjectController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/projects/create', [ProjectController::class, 'create']);
 Route::middleware('auth:sanctum')->delete('/projects/delete', [ProjectController::class, 'delete']);
 Route::post('/projects/linkUser', [ProjectController::class, 'linkUser']);
 
+Route::middleware('auth:sanctum')->get('/labels', [LabelController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/labels/create', [LabelController::class, 'create']);
+Route::middleware('auth:sanctum')->post('/labels/linkProject', [LabelController::class, 'linkProject']);
+Route::middleware('auth:sanctum')->delete('/labels/delete', [LabelController::class, 'delete']);

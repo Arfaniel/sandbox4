@@ -5,9 +5,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "name" : "test1122 tasdfasf",
-    "email" : "asdf@asd22.com",
-    "country_id" : 2
+    "name": "test1122 tasdfasf",
+    "email": "asdf@asd22.com",
+    "country_id": 2
 }
 
 ###
@@ -17,15 +17,10 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email" : "feest.einar@example.net",
-    "password" : "password",
-    "device_name" : "android"
+    "email": "feest.einar@example.net",
+    "password": "password",
+    "device_name": "android"
 }
-
-###
-# List users (filter by name OR/AND email OR/AND verified OR/AND country)
-GET http://sandbox4/api/users?filter[name]=&filter[email]=&filter[country]=&filter[verified]=
-Content-Type: application/json
 
 ###
 # List users (filter by name OR/AND email OR/AND verified OR/AND country)
@@ -64,7 +59,7 @@ Content-Type: application/json
 Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
 {
-    "name" : "Project 1"
+    "name": "Project 1"
 }
 
 ###
@@ -74,8 +69,12 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "projectId" : 7,
-    "users" : [9, 10, 4]
+    "projectId": 7,
+    "users": [
+        9,
+        10,
+        4
+    ]
 }
 
 
@@ -95,7 +94,7 @@ Content-Type: application/json
 Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
 {
-    "projectId" : 7
+    "projectId": 7
 }
 
 ###
@@ -103,30 +102,46 @@ Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 ###
 # Labels
 # Add labels
-POST http://sandbox4/api/labels
+POST http://sandbox4/api/labels/create
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
 {
-    "name" : "Label 1"
+    "name": "Label 1"
 }
 
 ###
 # Link label to projects
-POST http://sandbox4/api/labels/1
+POST http://sandbox4/api/labels/projectLink
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
-[1, 2, 3]
+{
+    "labelId": 11,
+    "projects": [
+        1,
+        2,
+        3
+    ]
+}
+
 
 ###
 # List labels (filter by user.email OR/AND projects)
-GET http://sandbox4/api/projects?filter[user][email]=&filter[projects]=
+GET http://sandbox4/api/labels?filter[user][email]=&filter[projects]=
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
 
 ###
 # Delete labels
-DELETE http://sandbox4/api/labels/1
+DELETE http://sandbox4/api/labels/delete
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|xcz0whQNjjZMKLezaY6ZtI6KUcyNvEqvwNvK4yDE
+
+{
+    "labelId": 4
+}

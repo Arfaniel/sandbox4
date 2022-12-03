@@ -22,10 +22,17 @@ class ProjectController
         $continentId = $request->filter['user']['continent_id'];
         if (!empty($continentId)) {
             $project->join('countries', 'users.country_id', '=', 'countries.id')
-            ->join('continents', 'countries.id', '=', 'continents.country_id');
+                ->join('continents', 'countries.id', '=', 'continents.country_id');
         }
         $projects = $project->get();
         return ProjectResource::collection($projects);
+    }
+
+    public function create(Request $request)
+    {
+        $project = Project::create($request->all());
+        $project->users()->attach($request->user());
+        return 'Created successfully';
     }
 
     public function linkUser(Request $request)
