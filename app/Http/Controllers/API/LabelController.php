@@ -11,7 +11,10 @@ class LabelController
     public function index(Request $request)
     {
         $label = Label::query();
-        $label->where('user_id', '=', $request->user()->id);
+        $label->join('label_project', 'label_project.label_id', '=', 'labels.id')
+            ->join('project_user', 'project_user.project_id', '=', 'label_project.project_id')
+            ->where('labels.user_id', '=', $request->user()->id)
+            ->where('project_user.user_id', '=', $request->user()->id);
         $userEmail = $request->filter['user']['email'];
         if (!empty($userEmail)) {
             $label->join('users', 'users.id', '=', 'labels.user_id')
@@ -55,5 +58,4 @@ class LabelController
         }
         return 'Fail to delete';
     }
-
 }

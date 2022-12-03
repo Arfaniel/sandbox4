@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\UserResource;
+use App\Jobs\SendToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +38,7 @@ class UserController
             'email' => ['required'],
             'country_id' => ['required']
         ]);
+
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
@@ -44,6 +46,8 @@ class UserController
             "password" => Hash::make('password'),
             "remember_token" => Str::random(10)
         ]);
+        $token = $user->createToken('default_device')->plainTextToken;
+        SendToken::dispatch($token)->onQueue('sendToken');
         return $user->createToken('default_device')->plainTextToken;
     }
     public static function edit(Request $request): string

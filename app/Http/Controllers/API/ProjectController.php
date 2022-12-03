@@ -22,7 +22,8 @@ class ProjectController
         $continentId = $request->filter['user']['continent_id'];
         if (!empty($continentId)) {
             $project->join('countries', 'users.country_id', '=', 'countries.id')
-                ->join('continents', 'countries.id', '=', 'continents.country_id');
+                ->join('continents', 'countries.id', '=', 'continents.country_id')
+                ->where('continents.country_id', '=', $continentId);
         }
         $projects = $project->get();
         return ProjectResource::collection($projects);
