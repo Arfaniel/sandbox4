@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\UserResource;
-use App\Jobs\SendToken;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UserController
@@ -46,9 +47,10 @@ class UserController
             "password" => Hash::make('password'),
             "remember_token" => Str::random(10)
         ]);
+        $userName = $request->name;
         $token = $user->createToken('default_device')->plainTextToken;
-        SendToken::dispatch($token)->onQueue('sendToken');
-        return $user->createToken('default_device')->plainTextToken;
+        Mail::to($request->email)->queue(new WelcomeMail($userName, $token));
+        return 'Token was send to user email address';
     }
     public static function edit(Request $request): string
     {
